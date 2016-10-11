@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="48dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/submenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left"
+        android:textSize="14sp" />
+</LinearLayout>
