@@ -10,7 +10,9 @@ An Open Source Android Client for self hosted wordpress blogs that works with js
 <br>
 3 Copy your google-services.json files data to <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/google-services.json">google-services.json</a> in app folder and you are ready to go.<br><br>
 
-more Instructions on development and other stuff witll be added :)
+more Instructions on development and other stuff witll be added :)<br>
+
+<b>New screenshots with more instructions & test apk & test website is available <a href="http://mgarebaghi.ir/en/2016/10/15/android-wordpress-json-api-client/">here</a>.</b>
 <br><br>
 
 ## Things Done
@@ -28,7 +30,8 @@ more Instructions on development and other stuff witll be added :)
 9 Add view for empty comment & post list.<br>
 10 Push Notification Added With FCM(FireBase Cloud Messaging)<br>
 11 Add Material Design Colors to colors.xml<br>
-12 Improve Some Views Like Comment Dialog view
+12 Improve Some Views Like Comment Dialog view<br>
+13 Cache system to load categories in navigation menu if there is no internet connection<Br>
 
 ## Things to do
 1 Add Search<br>
@@ -36,7 +39,7 @@ more Instructions on development and other stuff witll be added :)
 3 Add Transition Effects<br>
 4 Add Settings<br>
 5 Add Different Views<br>
-....<br><br>
+....<br>
 
 ## Things cannot be done
 1 <s>Add Signup and Login if possible</s><br>
