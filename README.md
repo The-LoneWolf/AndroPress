@@ -12,6 +12,7 @@ more Instructions on development and other stuff witll be added :)
 <br><br>
 
 ## Things Done
+### V1
 1 Android 4+ and Material design app with apcompat library<br>
 2 Custom dynamic navigation menu (dynamic by loading categories)<br>
 3 Loading and viewing posts and comments (lazy load)<br>
@@ -19,15 +20,21 @@ more Instructions on development and other stuff witll be added :)
 5 Badge to show comment counts in post detail activity.<br>
 6 Used swipe to close effect on post detail activity and comments activity.<br>
 
+### V1.1
+7 Add Splash Screen<br>
+8 Solved some errors<br>
+9 Add view for empty comment & post list.<br>
+
 ## Things to do
-1 Add Splash Screen<br>
-2 Add search<br>
-3 Add Caching system<br>
-4 Add Transition Effects<br>
-5 Add Settings<br>
-6 Add Different Views<br>
-7 Add Signup and Login if possible<br>
+1 Add search<br>
+2 Add Caching system<br>
+3 Add Transition Effects<br>
+4 Add Settings<br>
+5 Add Different Views<br>
 ....<br><br>
+
+## Things cannot be done
+1 <s>Add Signup and Login if possible</s><br>
 
 ## Libraries Used in this project
 1. <a href="https://github.com/loopj/android-async-http">loopj async http </a><br>
