@@ -8,7 +8,7 @@ An Open Source Android Client for self hosted wordpress blogs that works with js
 2 Just Copy your api adress to baseUrl variable in <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/src/main/java/ir/technopedia/wordpressjsonclient/util/NetUtil.java">NetUtils.java</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ** if your domain adress is http://test.com your json api default adress would be http://test.com/api
 <br><br>
-3 Copy your google-services.json files data to <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/app/google-services.json">google-services.json</a> in app folder and you are ready to go.<br>
+3 Copy your google-services.json files data to <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/google-services.json">google-services.json</a> in app folder and you are ready to go.<br>
 
 more Instructions on development and other stuff witll be added :)
 <br><br>
