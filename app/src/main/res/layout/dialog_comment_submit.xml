@@ -6,10 +6,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:minHeight="300dp"
+        android:gravity="center_horizontal"
+        android:minHeight="376dp"
         android:minWidth="320dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/add_comment"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_name"
@@ -17,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="24sp"
             android:layout_marginRight="24sp"
-            android:layout_marginTop="8sp">
+            android:layout_marginTop="24sp">
 
             <EditText
                 android:id="@+id/input_name"

@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -26,6 +29,7 @@ import ir.technopedia.wordpressjsonclient.R;
 import ir.technopedia.wordpressjsonclient.adapter.PostAdapter;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
 import ir.technopedia.wordpressjsonclient.util.RecyclerItemClickListener;
+import ir.technopedia.wordpressjsonclient.util.Util;
 
 public class PostFragment extends Fragment {
 
@@ -35,6 +39,8 @@ public class PostFragment extends Fragment {
     PostAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     SwipeRefreshLayout swipeRefreshLayout;
+    CardView noDataCard;
+    Button btnReload;
     int page = 1, selectedCat = 0, previousTotal = 0,
             visibleThreshold = 5, firstVisibleItem, visibleItemCount,
             totalItemCount;
@@ -52,6 +58,8 @@ public class PostFragment extends Fragment {
         postList = (RecyclerView) rootView.findViewById(R.id.post_list);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        btnReload = (Button) rootView.findViewById(R.id.btn_reload);
+        noDataCard = (CardView) rootView.findViewById(R.id.no_data);
 
         postArray = new ArrayList<>();
         adapter = new PostAdapter(getActivity(), postArray);
@@ -102,6 +110,16 @@ public class PostFragment extends Fragment {
             }
         });
 
+        btnReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                noDataCard.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(true);
+                refreshPosts(selectedCat);
+            }
+        });
+
         return rootView;
     }
 
@@ -120,24 +138,45 @@ public class PostFragment extends Fragment {
             adress = "get_category_posts/?id=" + cat + "&count=" + NetUtil.postCount + "&page=" + page;
         }
 
-        NetUtil.get(adress, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray posts = response.getJSONArray("posts");
-                    PostModel postModel;
-                    for (int i = 0; i < posts.length(); i++) {
-                        postModel = new PostModel();
-                        postModel.fromJson(posts.getJSONObject(i));
-                        postArray.add(postModel);
+        if (Util.isNetworkAvailable(getActivity())) {
+            NetUtil.get(adress, null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        JSONArray posts = response.getJSONArray("posts");
+
+                        PostModel postModel;
+                        for (int i = 0; i < posts.length(); i++) {
+                            postModel = new PostModel();
+                            postModel.fromJson(posts.getJSONObject(i));
+                            postArray.add(postModel);
+                        }
+                        adapter.update(postArray);
+                        swipeRefreshLayout.setRefreshing(false);
+
+                        if (!(postArray.size() > 0)) {
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            noDataCard.setVisibility(View.VISIBLE);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    adapter.update(postArray);
-                    swipeRefreshLayout.setRefreshing(false);
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    swipeRefreshLayout.setRefreshing(false);
+                    swipeRefreshLayout.setVisibility(View.GONE);
+                    noDataCard.setVisibility(View.VISIBLE);
+                }
+
+            });
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setVisibility(View.GONE);
+            noDataCard.setVisibility(View.VISIBLE);
+        }
     }
 
 }

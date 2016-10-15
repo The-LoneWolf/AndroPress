@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1012519743366",
+    "firebase_url": "https://test-f111d.firebaseio.com",
+    "project_id": "test-f111d",
+    "storage_bucket": "test-f111d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012519743366:android:55393339cddc246b",
+        "android_client_info": {
+          "package_name": "ir.technopedia.wordpressjsonclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012519743366-3anumqhkd58diiht1lcuod4taoufemmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAqvsbKwtzLYZbigN5ALjseLfyvUqnwKA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

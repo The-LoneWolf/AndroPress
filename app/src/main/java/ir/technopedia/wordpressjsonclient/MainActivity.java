@@ -27,6 +27,7 @@ import ir.technopedia.wordpressjsonclient.Model.ExpandedMenuModel;
 import ir.technopedia.wordpressjsonclient.adapter.NavExpandableListAdapter;
 import ir.technopedia.wordpressjsonclient.fragment.PostFragment;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
+import ir.technopedia.wordpressjsonclient.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,32 +111,46 @@ public class MainActivity extends AppCompatActivity {
         item.iconName = getResources().getString(R.string.categories);
         item.iconImg = R.drawable.ic_nav_category;
         navListHeader.add(item);
-        List<CategoryModel> heading = getCategories();
-        navListChild.put(navListHeader.get(1), heading);
+        categorylist = new ArrayList<>();
+        getCategories();
+        navListChild.put(navListHeader.get(1), categorylist);
         item = new ExpandedMenuModel();
         item.iconName = getResources().getString(R.string.about);
         item.iconImg = R.drawable.ic_nav_about;
         navListHeader.add(item);
     }
 
-    public List<CategoryModel> getCategories() {
-        categorylist = new ArrayList<>();
-        NetUtil.get("get_category_index/", null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray categories = response.getJSONArray("categories");
-                    for (int i = 0; i < categories.length(); i++) {
-                        CategoryModel headeritem = new CategoryModel();
-                        headeritem.fromJson(categories.getJSONObject(i));
-                        categorylist.add(i, headeritem);
-                        navAdapter.updated();
+    public void getCategories() {
+        if(Util.isNetworkAvailable(getBaseContext())){
+            NetUtil.get("get_category_index/", null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        Util.saveData(getBaseContext(), "categories", response.toString());
+                        JSONArray categories = response.getJSONArray("categories");
+                        for (int i = 0; i < categories.length(); i++) {
+                            CategoryModel headeritem = new CategoryModel();
+                            headeritem.fromJson(categories.getJSONObject(i));
+                            categorylist.add(i, headeritem);
+                            navAdapter.updated();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+            });
+        }else{
+            try {
+                JSONObject response = new JSONObject(Util.loadData(getBaseContext(), "categories"));
+                JSONArray categories = response.getJSONArray("categories");
+                for (int i = 0; i < categories.length(); i++) {
+                    CategoryModel headeritem = new CategoryModel();
+                    headeritem.fromJson(categories.getJSONObject(i));
+                    categorylist.add(i, headeritem);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-        return categorylist;
+        }
     }
 }

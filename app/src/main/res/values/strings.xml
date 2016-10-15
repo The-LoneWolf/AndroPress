@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Wordpress json client</string>
-
+    <string name="welcome">Welcome to Wordpress json client!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_comments">Comments</string>
@@ -21,4 +21,7 @@
     <string name="add_comment">Add Comment</string>
     <string name="comment_status_close_error">Comment Submittion for this post is closed!</string>
     <string name="comment_submit_success">Your Comment is successfully submited! it will be visible after administrator\'s approval!</string>
+    <string name="retry">Retry</string>
+    <string name="no_data_message">There is no data found! Please check your internet connection and try again!</string>
+    <string name="no_comment_message">There is no comments on this post! be the first person to start conversation!</string>
 </resources>

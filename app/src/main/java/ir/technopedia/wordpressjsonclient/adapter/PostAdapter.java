@@ -39,7 +39,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.DataObjectHold
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.title.setText(mDataset.get(position).title);
-        holder.category.setText(mDataset.get(position).categories.get(0));
+
+        if (mDataset.get(position).categories.size() > 0) {
+            holder.category.setVisibility(View.VISIBLE);
+            holder.category.setText(mDataset.get(position).categories.get(0));
+        } else {
+            holder.category.setVisibility(View.GONE);
+        }
+
         int count = mDataset.get(position).comment_count;
         if (!mDataset.get(position).comment_status.equals("open") && !(mDataset.get(position).comment_count > 0)) {
             holder.comments.setVisibility(View.GONE);

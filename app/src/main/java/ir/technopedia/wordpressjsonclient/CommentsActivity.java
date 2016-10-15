@@ -3,6 +3,7 @@ package ir.technopedia.wordpressjsonclient;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +31,7 @@ public class CommentsActivity extends SwipeBaseActivity {
     JSONArray jsonArray;
     int postId = -1;
     String commentStatus;
+    CardView noDataCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class CommentsActivity extends SwipeBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.comment_list);
         fab = (FloatingActionButton) findViewById(R.id.fab_add_comment);
+        noDataCard = (CardView) findViewById(R.id.no_data);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,6 +72,11 @@ public class CommentsActivity extends SwipeBaseActivity {
         adapter = new CommentAdapter(getBaseContext(), list);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        if (!(list.size() > 0)) {
+            recyclerView.setVisibility(View.GONE);
+            noDataCard.setVisibility(View.VISIBLE);
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
