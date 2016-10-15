@@ -24,6 +24,7 @@ more Instructions on development and other stuff witll be added :)
 7 Add Splash Screen<br>
 8 Solved some errors<br>
 9 Add view for empty comment & post list.<br>
+10 Push Notification Added With FCM(FireBase Cloud Messaging)
 
 ## Things to do
 1 Add search<br>
