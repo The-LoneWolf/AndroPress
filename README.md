@@ -26,8 +26,8 @@ more Instructions on development and other stuff witll be added :)
 7 Add Splash Screen<br>
 8 Solved some errors<br>
 9 Add view for empty comment & post list.<br>
-10 Push Notification Added With FCM(FireBase Cloud Messaging)
-11 Add Material Design Colors to colors.xml
+10 Push Notification Added With FCM(FireBase Cloud Messaging)<br>
+11 Add Material Design Colors to colors.xml<br>
 12 Improve Some Views Like Comment Dialog view
 
 ## Things to do
