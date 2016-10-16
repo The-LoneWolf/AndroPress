@@ -4,95 +4,122 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:minHeight="376dp"
-        android:minWidth="320dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/dialog_progress"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="376dp"
+            android:minWidth="320dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/add_comment"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
-
+                android:text="@string/submitting" />
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_name"
+        <LinearLayout
+            android:id="@+id/dialog_inputs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24sp"
-            android:layout_marginRight="24sp"
-            android:layout_marginTop="24sp">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:minHeight="376dp"
+            android:minWidth="320dp"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/input_name"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/add_comment"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
-                android:inputType="textPersonName"
-                android:maxLines="1"
-                android:textSize="16sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="24sp"
+                android:layout_marginRight="24sp"
+                android:layout_marginTop="24sp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24sp"
-            android:layout_marginRight="24sp"
-            android:layout_marginTop="8sp">
+                <EditText
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textSize="16sp" />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/input_email"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:textSize="16sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="24sp"
+                android:layout_marginRight="24sp"
+                android:layout_marginTop="8sp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24sp"
-            android:layout_marginRight="24sp"
-            android:layout_marginTop="8sp">
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textSize="16sp" />
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/input_content"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/content"
-                android:inputType="text"
-                android:minHeight="72dp"
-                android:minLines="1"
-                android:textSize="16sp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginLeft="24sp"
+                android:layout_marginRight="24sp"
+                android:layout_marginTop="8sp">
 
-        <Button
-            android:id="@+id/btn_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24sp"
-            android:layout_marginRight="24sp"
-            android:layout_marginTop="8sp"
-            android:background="@color/colorPrimary"
-            android:text="@string/submit"
-            android:textColor="@android:color/white" />
+                <EditText
+                    android:id="@+id/input_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/content"
+                    android:inputType="text"
+                    android:minHeight="72dp"
+                    android:textSize="16sp" />
+            </android.support.design.widget.TextInputLayout>
 
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24sp"
+                android:layout_marginRight="24sp"
+                android:layout_marginTop="8sp"
+                android:background="@color/colorPrimary"
+                android:text="@string/submit"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

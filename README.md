@@ -1,4 +1,4 @@
-# AndroidWordpressJsonApiClient
+# AndroPress
 An Open Source Android Client for self hosted wordpress blogs that works with json-api plugin
 
 <img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/all2.png">

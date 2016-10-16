@@ -2,6 +2,7 @@ package ir.technopedia.wordpressjsonclient.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
@@ -33,6 +34,7 @@ import ir.technopedia.wordpressjsonclient.util.Util;
 
 public class PostFragment extends Fragment {
 
+    View rootView;
     String adress;
     RecyclerView postList;
     List<PostModel> postArray;
@@ -53,7 +55,7 @@ public class PostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_post, container, false);
+        rootView = inflater.inflate(R.layout.fragment_post, container, false);
 
         postList = (RecyclerView) rootView.findViewById(R.id.post_list);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
@@ -124,11 +126,17 @@ public class PostFragment extends Fragment {
     }
 
     public void refreshPosts(int cat) {
-        selectedCat = cat;
-        swipeRefreshLayout.setRefreshing(true);
-        postArray = new ArrayList<>();
-        page = 1;
-        getPosts(cat);
+        if (Util.isNetworkAvailable(getActivity())) {
+            selectedCat = cat;
+            swipeRefreshLayout.setRefreshing(true);
+            postArray = new ArrayList<>();
+            page = 1;
+            getPosts(cat);
+        } else {
+            Snackbar.make(getActivity().findViewById(android.R.id.content),
+                    getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     public void getPosts(int cat) {

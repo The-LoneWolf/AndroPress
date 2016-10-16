@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getCategories() {
-        if(Util.isNetworkAvailable(getBaseContext())){
+        if (Util.isNetworkAvailable(getBaseContext())) {
             NetUtil.get("get_category_index/", null, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        }else{
+        } else {
             try {
                 JSONObject response = new JSONObject(Util.loadData(getBaseContext(), "categories"));
                 JSONArray categories = response.getJSONArray("categories");

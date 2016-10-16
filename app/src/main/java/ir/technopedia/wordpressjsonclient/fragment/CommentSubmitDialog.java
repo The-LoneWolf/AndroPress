@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import ir.technopedia.wordpressjsonclient.R;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
+import ir.technopedia.wordpressjsonclient.util.Util;
 
 /**
  * Created by user1 on 10/7/2016.
@@ -28,16 +28,23 @@ public class CommentSubmitDialog extends DialogFragment {
     EditText edtName, edtEmail, edtContent;
     Button btnSubmit;
     int postId = -1;
+    String name, email, content;
+    View mView;
+    LinearLayout layoutInputs, layoutProgress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.dialog_comment_submit, container, false);
+        mView = inflater.inflate(R.layout.dialog_comment_submit, container, false);
         getDialog().setTitle(getResources().getString(R.string.add_comment));
 
+        layoutInputs = (LinearLayout) mView.findViewById(R.id.dialog_inputs);
+        layoutProgress = (LinearLayout) mView.findViewById(R.id.dialog_progress);
         edtName = (EditText) mView.findViewById(R.id.input_name);
         edtEmail = (EditText) mView.findViewById(R.id.input_email);
         edtContent = (EditText) mView.findViewById(R.id.input_content);
         btnSubmit = (Button) mView.findViewById(R.id.btn_submit);
+        layoutInputs.setVisibility(View.VISIBLE);
+        layoutProgress.setVisibility(View.GONE);
 
         postId = getArguments().getInt("postId");
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -47,35 +54,52 @@ public class CommentSubmitDialog extends DialogFragment {
             }
         });
 
+        if (!Util.loadData(getActivity(), "comment_name").equals("")) {
+            edtName.setText(Util.loadData(getActivity(), "comment_name"));
+        }
+
+        if (!Util.loadData(getActivity(), "comment_email").equals("")) {
+            edtEmail.setText(Util.loadData(getActivity(), "comment_email"));
+        }
+
         return mView;
     }
 
     public void submitComment() {
 
-        String name = edtName.getText().toString();
-        String email = edtEmail.getText().toString();
-        String content = edtContent.getText().toString();
+        name = edtName.getText().toString();
+        email = edtEmail.getText().toString();
+        content = edtContent.getText().toString();
         String url = "respond/submit_comment/?post_id=" + postId + "&name=" + name + "&email=" + email + "&content=" + content;
 
-        NetUtil.get(url, null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                edtName.setText("");
-                edtEmail.setText("");
-                edtContent.setText("");
-                Snackbar.make(getActivity().findViewById(android.R.id.content),
-                        getResources().getString(R.string.comment_submit_success),
-                        Snackbar.LENGTH_SHORT).show();
-                getDialog().dismiss();
-            }
+        if (Util.isNetworkAvailable(getActivity())) {
+            layoutInputs.setVisibility(View.GONE);
+            layoutProgress.setVisibility(View.VISIBLE);
+            NetUtil.get(url, null, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Snackbar.make(getActivity().findViewById(android.R.id.content),
-                        getResources().getString(R.string.comment_status_close_error),
-                        Snackbar.LENGTH_SHORT).show();
-                getDialog().dismiss();
-            }
-        });
+                    Util.saveData(getActivity(), "comment_name", name);
+                    Util.saveData(getActivity(), "comment_email", email);
+                    edtContent.setText("");
+                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+                            getResources().getString(R.string.comment_submit_success),
+                            Snackbar.LENGTH_SHORT).show();
+                    getDialog().dismiss();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+                            getResources().getString(R.string.comment_status_close_error),
+                            Snackbar.LENGTH_SHORT).show();
+                    getDialog().dismiss();
+                }
+            });
+        } else {
+            Snackbar.make(getActivity().findViewById(android.R.id.content),
+                    getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_SHORT).show();
+        }
     }
 }
