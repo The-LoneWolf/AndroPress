@@ -3,7 +3,10 @@ package ir.technopedia.wordpressjsonclient.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ public class CommentSubmitDialog extends DialogFragment {
     String name, email, content;
     View mView;
     LinearLayout layoutInputs, layoutProgress;
+    TextInputLayout txtInputEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class CommentSubmitDialog extends DialogFragment {
         layoutProgress = (LinearLayout) mView.findViewById(R.id.dialog_progress);
         edtName = (EditText) mView.findViewById(R.id.input_name);
         edtEmail = (EditText) mView.findViewById(R.id.input_email);
+        txtInputEmail = (TextInputLayout) mView.findViewById(R.id.input_layout_email);
         edtContent = (EditText) mView.findViewById(R.id.input_content);
         btnSubmit = (Button) mView.findViewById(R.id.btn_submit);
         layoutInputs.setVisibility(View.VISIBLE);
@@ -62,6 +67,27 @@ public class CommentSubmitDialog extends DialogFragment {
             edtEmail.setText(Util.loadData(getActivity(), "comment_email"));
         }
 
+        edtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!Util.isValidEmail(edtEmail.getText().toString())) {
+                    txtInputEmail.setError(getString(R.string.invalid_email));
+                } else {
+                    txtInputEmail.setErrorEnabled(false);
+                }
+            }
+        });
+
         return mView;
     }
 
@@ -73,14 +99,15 @@ public class CommentSubmitDialog extends DialogFragment {
         String url = "respond/submit_comment/?post_id=" + postId + "&name=" + name + "&email=" + email + "&content=" + content;
 
         if (Util.isNetworkAvailable(getActivity())) {
+
             layoutInputs.setVisibility(View.GONE);
             layoutProgress.setVisibility(View.VISIBLE);
+            Util.saveData(getActivity(), "comment_name", name);
+            Util.saveData(getActivity(), "comment_email", email);
+
             NetUtil.get(url, null, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                    Util.saveData(getActivity(), "comment_name", name);
-                    Util.saveData(getActivity(), "comment_email", email);
                     edtContent.setText("");
                     Snackbar.make(getActivity().findViewById(android.R.id.content),
                             getResources().getString(R.string.comment_submit_success),

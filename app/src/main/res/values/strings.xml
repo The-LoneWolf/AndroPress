@@ -28,4 +28,5 @@
     <string name="crash_report">We are sorry to inform you that the application has crashed, because of an unknown error! Send it\'s report to the developer to solve it!</string>
     <string name="crash_title">Application Crash!</string>
     <string name="no_internet">Please check your internet connection and try resubmitting your comment!</string>
+    <string name="invalid_email">Invalid Email Adress!</string>
 </resources>
