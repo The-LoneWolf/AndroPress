@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -29,7 +33,8 @@ import ir.technopedia.wordpressjsonclient.fragment.PostFragment;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
 import ir.technopedia.wordpressjsonclient.util.Util;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SearchView.OnQueryTextListener {
 
     NavigationView navigationView;
     DrawerLayout drawer;
@@ -119,6 +124,15 @@ public class MainActivity extends AppCompatActivity {
         navListHeader.add(item);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
     public void getCategories() {
         if (Util.isNetworkAvailable(getBaseContext())) {
             NetUtil.get("get_category_index/", null, new JsonHttpResponseHandler() {
@@ -151,5 +165,17 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        postFragment.showDataUi();
+        postFragment.refreshPosts(-1, query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

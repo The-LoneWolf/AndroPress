@@ -86,7 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.DataObjectHold
     public static class DataObjectHolder extends RecyclerView.ViewHolder {
 
         TextView title, comments, category;
-        ImageView img, comments_img;
+        ImageView comments_img, img;
 
         public DataObjectHolder(View itemView) {
             super(itemView);

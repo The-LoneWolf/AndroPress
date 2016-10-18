@@ -29,4 +29,5 @@
     <string name="crash_title">Application Crash!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="invalid_email">Invalid Email Adress!</string>
+    <string name="hint_search">Search post...</string>
 </resources>

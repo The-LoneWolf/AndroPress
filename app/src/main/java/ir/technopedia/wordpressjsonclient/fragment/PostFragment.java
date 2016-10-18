@@ -197,4 +197,9 @@ public class PostFragment extends Fragment {
         }
     };
 
+    public void showDataUi() {
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        noDataCard.setVisibility(View.GONE);
+    }
+
 }
