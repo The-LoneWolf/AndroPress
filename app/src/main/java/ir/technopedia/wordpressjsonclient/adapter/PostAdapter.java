@@ -48,12 +48,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.DataObjectHold
         }
 
         int count = mDataset.get(position).comment_count;
-        if (!mDataset.get(position).comment_status.equals("open") && !(mDataset.get(position).comment_count > 0)) {
+        if (!mDataset.get(position).comment_status.equals("open") && !(count > 0)) {
             holder.comments.setVisibility(View.GONE);
+            holder.comments_img.setVisibility(View.GONE);
         } else {
             holder.comments.setVisibility(View.VISIBLE);
-            String countText = (count == 1 || count == 0) ? count + " Comment" : count + " Comments";
-            holder.comments.setText(countText);
+            holder.comments_img.setVisibility(View.VISIBLE);
+            holder.comments.setText(count + "");
         }
 
         Picasso.with(context)
@@ -85,7 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.DataObjectHold
     public static class DataObjectHolder extends RecyclerView.ViewHolder {
 
         TextView title, comments, category;
-        ImageView img;
+        ImageView img, comments_img;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
@@ -93,6 +94,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.DataObjectHold
             comments = (TextView) itemView.findViewById(R.id.comment_count);
             category = (TextView) itemView.findViewById(R.id.category);
             img = (ImageView) itemView.findViewById(R.id.img);
+            comments_img = (ImageView) itemView.findViewById(R.id.comment_count_img);
         }
     }
 }

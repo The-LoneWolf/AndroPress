@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -47,6 +46,7 @@ public class PostFragment extends Fragment {
             visibleThreshold = 5, firstVisibleItem, visibleItemCount,
             totalItemCount;
     boolean loading = true;
+    String search = "";
 
     public PostFragment() {
         // Required empty public constructor
@@ -67,7 +67,7 @@ public class PostFragment extends Fragment {
         adapter = new PostAdapter(getActivity(), postArray);
         postList.setLayoutManager(linearLayoutManager);
         postList.setAdapter(adapter);
-        refreshPosts(selectedCat);
+        refreshPosts(selectedCat, "");
 
         postList.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -83,34 +83,11 @@ public class PostFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshPosts(selectedCat);
+                refreshPosts(selectedCat, search);
             }
         });
 
-        postList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                visibleItemCount = recyclerView.getChildCount();
-                totalItemCount = linearLayoutManager.getItemCount();
-                firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
-
-                if (loading) {
-                    if (totalItemCount > previousTotal) {
-                        loading = false;
-                        previousTotal = totalItemCount;
-                    }
-                }
-                if (!loading && (totalItemCount - visibleItemCount)
-                        <= (firstVisibleItem + visibleThreshold)) {
-                    page++;
-                    getPosts(selectedCat);
-                    loading = true;
-                }
-
-            }
-        });
+        postList.addOnScrollListener(scrollListener);
 
         btnReload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,20 +95,24 @@ public class PostFragment extends Fragment {
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 noDataCard.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(true);
-                refreshPosts(selectedCat);
+                refreshPosts(selectedCat, search);
             }
         });
 
         return rootView;
     }
 
-    public void refreshPosts(int cat) {
+    public void refreshPosts(int cat, String query) {
         if (Util.isNetworkAvailable(getActivity())) {
-            selectedCat = cat;
+            if (cat > -1) {
+                selectedCat = cat;
+            }
+            search = query;
             swipeRefreshLayout.setRefreshing(true);
             postArray = new ArrayList<>();
+            loading = false;
             page = 1;
-            getPosts(cat);
+            getPosts(selectedCat);
         } else {
             Snackbar.make(getActivity().findViewById(android.R.id.content),
                     getResources().getString(R.string.no_internet),
@@ -144,6 +125,10 @@ public class PostFragment extends Fragment {
             adress = "get_recent_posts/?page=" + page + "&count=" + NetUtil.postCount;
         } else {
             adress = "get_category_posts/?id=" + cat + "&count=" + NetUtil.postCount + "&page=" + page;
+        }
+
+        if (!search.equals("")) {
+            adress = "get_search_results/?search=" + search + "&page=" + page + "&count=" + NetUtil.postCount;
         }
 
         if (Util.isNetworkAvailable(getActivity())) {
@@ -186,5 +171,30 @@ public class PostFragment extends Fragment {
             noDataCard.setVisibility(View.VISIBLE);
         }
     }
+
+    RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            visibleItemCount = recyclerView.getChildCount();
+            totalItemCount = linearLayoutManager.getItemCount();
+            firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+            if (!loading && (totalItemCount - visibleItemCount)
+                    <= (firstVisibleItem + visibleThreshold)) {
+                page++;
+                getPosts(selectedCat);
+                loading = true;
+            }
+
+        }
+    };
 
 }

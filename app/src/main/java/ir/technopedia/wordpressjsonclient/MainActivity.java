@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 if (groupPosition == 0) {
-                    postFragment.refreshPosts(0);
+                    postFragment.refreshPosts(0, "");
                 } else if (groupPosition == 1) {
                     navListHeader.get(groupPosition).toggle();
                     return false;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         navMenuList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                postFragment.refreshPosts(categorylist.get(childPosition).id);
+                postFragment.refreshPosts(categorylist.get(childPosition).id, "");
                 onBackPressed();
                 return true;
             }

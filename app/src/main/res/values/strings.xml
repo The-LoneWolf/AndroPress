@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wordpress json client</string>
+    <string name="app_name">AndroPress</string>
     <string name="welcome">Welcome to Wordpress json client!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -27,6 +27,6 @@
     <string name="no_comment_message">There is no comments on this post! be the first person to start conversation!</string>
     <string name="crash_report">We are sorry to inform you that the application has crashed, because of an unknown error! Send it\'s report to the developer to solve it!</string>
     <string name="crash_title">Application Crash!</string>
-    <string name="no_internet">Please check your internet connection and try resubmitting your comment!</string>
+    <string name="no_internet">Please check your internet connection!</string>
     <string name="invalid_email">Invalid Email Adress!</string>
 </resources>
