@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +26,11 @@ public class Util {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Body);
         sharingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(Intent.createChooser(sharingIntent, context.getResources().getString(R.string.share_with)));
+    }
+
+    public static void openAdress(Context context, String adress) {
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(adress));
+        context.startActivity(intent);
     }
 
     // checking internet validation
@@ -56,7 +62,6 @@ public class Util {
     public static boolean isValidEmail(String email) {
         String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

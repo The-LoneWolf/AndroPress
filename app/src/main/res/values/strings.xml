@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">AndroPress</string>
-    <string name="welcome">Welcome to Wordpress json client!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_comments">Comments</string>
@@ -23,11 +22,22 @@
     <string name="comment_status_close_error">Comment Submittion for this post is closed!</string>
     <string name="comment_submit_success">Your Comment is successfully submited! it will be visible after administrator\'s approval!</string>
     <string name="retry">Retry</string>
-    <string name="no_data_message">There is no data found! Please check your internet connection and try again!</string>
+    <string name="no_data_message">There is no data found! Please check your internet connection or search query then try again!</string>
     <string name="no_comment_message">There is no comments on this post! be the first person to start conversation!</string>
     <string name="crash_report">We are sorry to inform you that the application has crashed, because of an unknown error! Send it\'s report to the developer to solve it!</string>
     <string name="crash_title">Application Crash!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="invalid_email">Invalid Email Adress!</string>
     <string name="hint_search">Search post...</string>
+    <string name="close_message">Press back again to exit!</string>
+
+    <!--about page data-->
+    <string name="about_content">Lorem ipsum dolor sit amet, cu solum laudem graeci has, eam at enim mazim nonumes, te eam mnesarchum adversarium. No mel nibh saperet, cu causae admodum nominati eam. Ius an nihil veniam, ad zril alterum scripserit eam. An duo sumo nemore minimum, no quod vide dicant pro, quem ignota reprimique ea sed.</string>
+    <string name="developer">Developed By : Mehrdad Garebaghi</string>
+    <string name="companey">Technopedia team.</string>
+    <string name="version">Version number 2 (2018/10/18)</string>
+    <string name="social_1_adress">http://mgarebaghi.ir/en/</string>
+    <string name="social_2_adress">http://mgarebaghi.ir/en/</string>
+    <string name="social_3_adress">http://mgarebaghi.ir/en/</string>
+    <string name="social_4_adress">http://mgarebaghi.ir/en/</string>
 </resources>

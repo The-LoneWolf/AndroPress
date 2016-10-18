@@ -1,6 +1,7 @@
 package ir.technopedia.wordpressjsonclient;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -29,6 +31,7 @@ import cz.msebera.android.httpclient.Header;
 import ir.technopedia.wordpressjsonclient.Model.CategoryModel;
 import ir.technopedia.wordpressjsonclient.Model.ExpandedMenuModel;
 import ir.technopedia.wordpressjsonclient.adapter.NavExpandableListAdapter;
+import ir.technopedia.wordpressjsonclient.fragment.AboutFragment;
 import ir.technopedia.wordpressjsonclient.fragment.PostFragment;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
 import ir.technopedia.wordpressjsonclient.util.Util;
@@ -44,8 +47,10 @@ public class MainActivity extends AppCompatActivity
     HashMap<ExpandedMenuModel, List<CategoryModel>> navListChild;
     NavExpandableListAdapter navAdapter;
     FragmentManager fragmentManager;
-    PostFragment postFragment;
     List<CategoryModel> categorylist;
+    int selectedCat = 0;
+    MenuItem searchItem;
+    boolean isReadyToExit = false, isPostPage = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navMenuList = (ExpandableListView) findViewById(R.id.nav_menu);
-        postFragment = new PostFragment();
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,10 +77,15 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 if (groupPosition == 0) {
-                    postFragment.refreshPosts(0, "");
+                    selectedCat = groupPosition;
+                    loadPostFragment(selectedCat, "");
                 } else if (groupPosition == 1) {
                     navListHeader.get(groupPosition).toggle();
                     return false;
+                } else if (groupPosition == 2) {
+                    searchItem.setVisible(false);
+                    isPostPage = false;
+                    fragmentManager.beginTransaction().replace(R.id.frame, new AboutFragment()).addToBackStack(null).commit();
                 }
                 onBackPressed();
                 return false;
@@ -86,12 +95,27 @@ public class MainActivity extends AppCompatActivity
         navMenuList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                postFragment.refreshPosts(categorylist.get(childPosition).id, "");
+                selectedCat = categorylist.get(childPosition).id;
+                loadPostFragment(selectedCat, "");
                 onBackPressed();
                 return true;
             }
         });
 
+        loadPostFragment(selectedCat, "");
+    }
+
+    public void loadPostFragment(int cat, String query) {
+        isPostPage = true;
+        if (searchItem != null) {
+            searchItem.setVisible(true);
+        }
+        PostFragment postFragment = new PostFragment();
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        Bundle bundle = new Bundle();
+        bundle.putInt("cat", cat);
+        bundle.putString("query", query);
+        postFragment.setArguments(bundle);
         fragmentManager.beginTransaction().replace(R.id.frame, postFragment).commit();
     }
 
@@ -100,7 +124,23 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (isPostPage) {
+                if (isReadyToExit) {
+                    super.onBackPressed();
+                } else {
+                    Toast.makeText(getBaseContext(), getString(R.string.close_message), Toast.LENGTH_LONG).show();
+                    isReadyToExit = true;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            isReadyToExit = false;
+                        }
+                    }, 3000);
+                }
+            } else {
+                searchItem.setVisible(true);
+                super.onBackPressed();
+            }
         }
     }
 
@@ -127,9 +167,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
+        searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                loadPostFragment(selectedCat, "");
+                return true;
+            }
+        });
         return true;
     }
 
@@ -169,8 +221,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        postFragment.showDataUi();
-        postFragment.refreshPosts(-1, query);
+        loadPostFragment(0, query);
         return false;
     }
 

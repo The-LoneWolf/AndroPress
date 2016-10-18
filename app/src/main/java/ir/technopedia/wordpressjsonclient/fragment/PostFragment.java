@@ -34,7 +34,7 @@ import ir.technopedia.wordpressjsonclient.util.Util;
 public class PostFragment extends Fragment {
 
     View rootView;
-    String adress;
+    String adress, search = "";
     RecyclerView postList;
     List<PostModel> postArray;
     PostAdapter adapter;
@@ -46,7 +46,6 @@ public class PostFragment extends Fragment {
             visibleThreshold = 5, firstVisibleItem, visibleItemCount,
             totalItemCount;
     boolean loading = true;
-    String search = "";
 
     public PostFragment() {
         // Required empty public constructor
@@ -56,6 +55,10 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_post, container, false);
+
+        Bundle bundle = this.getArguments();
+        selectedCat = bundle.getInt("cat", 0);
+        search = bundle.getString("query", "");
 
         postList = (RecyclerView) rootView.findViewById(R.id.post_list);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe);
@@ -67,7 +70,7 @@ public class PostFragment extends Fragment {
         adapter = new PostAdapter(getActivity(), postArray);
         postList.setLayoutManager(linearLayoutManager);
         postList.setAdapter(adapter);
-        refreshPosts(selectedCat, "");
+        refreshPosts();
 
         postList.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -83,7 +86,7 @@ public class PostFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshPosts(selectedCat, search);
+                refreshPosts();
             }
         });
 
@@ -95,19 +98,15 @@ public class PostFragment extends Fragment {
                 swipeRefreshLayout.setVisibility(View.VISIBLE);
                 noDataCard.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(true);
-                refreshPosts(selectedCat, search);
+                refreshPosts();
             }
         });
 
         return rootView;
     }
 
-    public void refreshPosts(int cat, String query) {
+    public void refreshPosts() {
         if (Util.isNetworkAvailable(getActivity())) {
-            if (cat > -1) {
-                selectedCat = cat;
-            }
-            search = query;
             swipeRefreshLayout.setRefreshing(true);
             postArray = new ArrayList<>();
             loading = false;
