@@ -1,6 +1,8 @@
 package ir.technopedia.wordpressjsonclient;
 
 import com.orm.SugarApp;
+
+import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
@@ -19,6 +21,6 @@ public class MyApplication extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
-//        ACRA.init(this);
+        ACRA.init(this);
     }
 }
