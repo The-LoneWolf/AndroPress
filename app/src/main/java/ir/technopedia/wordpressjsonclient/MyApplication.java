@@ -1,8 +1,6 @@
 package ir.technopedia.wordpressjsonclient;
 
-import android.app.Application;
-
-import org.acra.ACRA;
+import com.orm.SugarApp;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
@@ -16,7 +14,7 @@ import org.acra.annotation.ReportsCrashes;
         resDialogTheme = R.style.AppCompatAlertDialogStyle,
         resDialogIcon = R.mipmap.ic_launcher)
 
-public class MyApplication extends Application {
+public class MyApplication extends SugarApp {
 
     @Override
     public void onCreate() {

@@ -1,4 +1,6 @@
-package ir.technopedia.wordpressjsonclient.Model;
+package ir.technopedia.wordpressjsonclient.model;
+
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,7 +9,7 @@ import org.json.JSONObject;
  * Created by user1 on 10/5/2016.
  */
 
-public class CommentModel {
+public class CommentModel extends SugarRecord {
     public int id;
     public String name, date, content;
 

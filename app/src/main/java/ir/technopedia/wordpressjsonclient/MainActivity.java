@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import ir.technopedia.wordpressjsonclient.Model.CategoryModel;
-import ir.technopedia.wordpressjsonclient.Model.ExpandedMenuModel;
+import ir.technopedia.wordpressjsonclient.model.CategoryModel;
+import ir.technopedia.wordpressjsonclient.model.ExpandedMenuModel;
 import ir.technopedia.wordpressjsonclient.adapter.NavExpandableListAdapter;
 import ir.technopedia.wordpressjsonclient.fragment.AboutFragment;
 import ir.technopedia.wordpressjsonclient.fragment.PostFragment;
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity
                     navListHeader.get(groupPosition).toggle();
                     return false;
                 } else if (groupPosition == 2) {
+                    selectedCat = -1;
+                    loadPostFragment(selectedCat, "");
+                } else if (groupPosition == 3) {
                     searchItem.setVisible(false);
                     isPostPage = false;
                     fragmentManager.beginTransaction().replace(R.id.frame, new AboutFragment()).addToBackStack(null).commit();
@@ -158,6 +161,10 @@ public class MainActivity extends AppCompatActivity
         categorylist = new ArrayList<>();
         getCategories();
         navListChild.put(navListHeader.get(1), categorylist);
+        item = new ExpandedMenuModel();
+        item.iconName = getResources().getString(R.string.archive);
+        item.iconImg = R.drawable.ic_nav_archive;
+        navListHeader.add(item);
         item = new ExpandedMenuModel();
         item.iconName = getResources().getString(R.string.about);
         item.iconImg = R.drawable.ic_nav_about;

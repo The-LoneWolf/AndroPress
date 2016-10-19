@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ir.technopedia.wordpressjsonclient.Model.PostModel;
+import ir.technopedia.wordpressjsonclient.model.PostModel;
 import ir.technopedia.wordpressjsonclient.R;
 
 /**

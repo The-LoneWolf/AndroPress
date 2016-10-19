@@ -1,11 +1,13 @@
-package ir.technopedia.wordpressjsonclient.Model;
+package ir.technopedia.wordpressjsonclient.model;
+
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
 
-public class CategoryModel {
+public class CategoryModel extends SugarRecord {
 
     public String title;
     public int id, postCount;

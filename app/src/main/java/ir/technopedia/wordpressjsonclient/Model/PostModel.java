@@ -1,4 +1,6 @@
-package ir.technopedia.wordpressjsonclient.Model;
+package ir.technopedia.wordpressjsonclient.model;
+
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +13,7 @@ import java.util.List;
  * Created by user1 on 10/5/2016.
  */
 
-public class PostModel {
+public class PostModel extends SugarRecord {
     public int id, comment_count;
     public String url, title, content, date, author, comment_status, status, img;
     public List<String> categories;

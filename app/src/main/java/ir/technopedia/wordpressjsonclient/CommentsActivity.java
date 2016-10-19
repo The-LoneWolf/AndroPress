@@ -16,7 +16,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.technopedia.wordpressjsonclient.Model.CommentModel;
+import ir.technopedia.wordpressjsonclient.model.CommentModel;
 import ir.technopedia.wordpressjsonclient.adapter.CommentAdapter;
 import ir.technopedia.wordpressjsonclient.fragment.CommentSubmitDialog;
 import ir.technopedia.wordpressjsonclient.view.SwipeBaseActivity;

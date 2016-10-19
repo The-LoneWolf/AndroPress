@@ -9,8 +9,8 @@
         android:title="@string/action_share"
         app:showAsAction="collapseActionView|ifRoom" />
     <item
-        android:id="@+id/action_comments"
-        android:icon="@drawable/ic_comments_badge"
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_action_favorite"
         android:orderInCategory="100"
         android:title="@string/action_comments"
         app:showAsAction="collapseActionView|ifRoom" />

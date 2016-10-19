@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -24,7 +25,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import ir.technopedia.wordpressjsonclient.DetailActivity;
-import ir.technopedia.wordpressjsonclient.Model.PostModel;
+import ir.technopedia.wordpressjsonclient.model.PostModel;
 import ir.technopedia.wordpressjsonclient.R;
 import ir.technopedia.wordpressjsonclient.adapter.PostAdapter;
 import ir.technopedia.wordpressjsonclient.util.NetUtil;
@@ -40,7 +41,7 @@ public class PostFragment extends Fragment {
     PostAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     SwipeRefreshLayout swipeRefreshLayout;
-    CardView noDataCard;
+    CardView noDataCard, noArchiveCard;
     Button btnReload;
     int page = 1, selectedCat = 0, previousTotal = 0,
             visibleThreshold = 5, firstVisibleItem, visibleItemCount,
@@ -65,12 +66,18 @@ public class PostFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         btnReload = (Button) rootView.findViewById(R.id.btn_reload);
         noDataCard = (CardView) rootView.findViewById(R.id.no_data);
+        noArchiveCard = (CardView) rootView.findViewById(R.id.no_archive);
 
         postArray = new ArrayList<>();
         adapter = new PostAdapter(getActivity(), postArray);
         postList.setLayoutManager(linearLayoutManager);
         postList.setAdapter(adapter);
-        refreshPosts();
+
+        if (selectedCat > -1) {
+            refreshPosts();
+        } else {
+            loadArchive();
+        }
 
         postList.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -78,6 +85,11 @@ public class PostFragment extends Fragment {
                 if (!swipeRefreshLayout.isRefreshing()) {
                     Intent intent = new Intent(getActivity(), DetailActivity.class);
                     intent.putExtra("data", postArray.get(position).toJson().toString());
+                    if (selectedCat == -1) {
+                        intent.putExtra("is_archive", "true");
+                    } else {
+                        intent.putExtra("is_archive", "false");
+                    }
                     startActivity(intent);
                 }
             }
@@ -105,6 +117,25 @@ public class PostFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (selectedCat == -1) {
+            loadArchive();
+        }
+    }
+
+    public void loadArchive() {
+        postArray = new ArrayList<>();
+        postArray = PostModel.listAll(PostModel.class);
+        adapter.update(postArray);
+
+        if (postArray.size() <= 0) {
+            noArchiveCard.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.GONE);
+        }
+    }
+
     public void refreshPosts() {
         if (Util.isNetworkAvailable(getActivity())) {
             swipeRefreshLayout.setRefreshing(true);
@@ -122,7 +153,7 @@ public class PostFragment extends Fragment {
     public void getPosts(int cat) {
         if (cat == 0) {
             adress = "get_recent_posts/?page=" + page + "&count=" + NetUtil.postCount;
-        } else {
+        } else if (cat > 0) {
             adress = "get_category_posts/?id=" + cat + "&count=" + NetUtil.postCount + "&page=" + page;
         }
 

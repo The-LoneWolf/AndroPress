@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-import ir.technopedia.wordpressjsonclient.Model.CategoryModel;
-import ir.technopedia.wordpressjsonclient.Model.ExpandedMenuModel;
+import ir.technopedia.wordpressjsonclient.model.CategoryModel;
+import ir.technopedia.wordpressjsonclient.model.ExpandedMenuModel;
 import ir.technopedia.wordpressjsonclient.R;
 
 

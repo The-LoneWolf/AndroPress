@@ -6,6 +6,7 @@
     <string name="action_share">Share</string>
     <string name="home">Home</string>
     <string name="categories">Category</string>
+    <string name="archive">Archive</string>
     <string name="about">About Me</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="written_by">Written by :</string>
@@ -23,6 +24,7 @@
     <string name="comment_submit_success">Your Comment is successfully submited! it will be visible after administrator\'s approval!</string>
     <string name="retry">Retry</string>
     <string name="no_data_message">There is no data found! Please check your internet connection or search query then try again!</string>
+    <string name="no_archive_message">You don\'t have any archived data!</string>
     <string name="no_comment_message">There is no comments on this post! be the first person to start conversation!</string>
     <string name="crash_report">We are sorry to inform you that the application has crashed, because of an unknown error! Send it\'s report to the developer to solve it!</string>
     <string name="crash_title">Application Crash!</string>
@@ -30,6 +32,8 @@
     <string name="invalid_email">Invalid Email Adress!</string>
     <string name="hint_search">Search post...</string>
     <string name="close_message">Press back again to exit!</string>
+    <string name="added_to_favorites">Post is saved to your archive!</string>
+    <string name="removed_from_favorites">Post is removed from archive!</string>
 
     <!--about page data-->
     <string name="about_content">Lorem ipsum dolor sit amet, cu solum laudem graeci has, eam at enim mazim nonumes, te eam mnesarchum adversarium. No mel nibh saperet, cu causae admodum nominati eam. Ius an nihil veniam, ad zril alterum scripserit eam. An duo sumo nemore minimum, no quod vide dicant pro, quem ignota reprimique ea sed.</string>

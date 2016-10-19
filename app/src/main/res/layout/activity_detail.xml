@@ -43,4 +43,14 @@
 
     <include layout="@layout/content_detail" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_action_comment"
+        app:layout_behavior="ir.technopedia.wordpressjsonclient.util.ScrollAwareFABBehavior"
+        app:layout_anchor="@+id/content_detail_layout"
+        app:layout_anchorGravity="right|bottom" />
+
 </android.support.design.widget.CoordinatorLayout>

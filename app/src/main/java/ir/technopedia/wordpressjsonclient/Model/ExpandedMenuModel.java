@@ -1,4 +1,4 @@
-package ir.technopedia.wordpressjsonclient.Model;
+package ir.technopedia.wordpressjsonclient.model;
 
 public class ExpandedMenuModel {
 

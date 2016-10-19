@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -109,24 +110,27 @@ public class CommentSubmitDialog extends DialogFragment {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     edtContent.setText("");
-                    Snackbar.make(getActivity().findViewById(android.R.id.content),
-                            getResources().getString(R.string.comment_submit_success),
-                            Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+//                            getResources().getString(R.string.comment_submit_success),
+//                            Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),getResources().getString(R.string.comment_submit_success),Toast.LENGTH_LONG).show();
                     getDialog().dismiss();
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Snackbar.make(getActivity().findViewById(android.R.id.content),
-                            getResources().getString(R.string.comment_status_close_error),
-                            Snackbar.LENGTH_SHORT).show();
+//                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+//                            getResources().getString(R.string.comment_status_close_error),
+//                            Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),getResources().getString(R.string.comment_status_close_error),Toast.LENGTH_LONG).show();
                     getDialog().dismiss();
                 }
             });
         } else {
-            Snackbar.make(getActivity().findViewById(android.R.id.content),
-                    getResources().getString(R.string.no_internet),
-                    Snackbar.LENGTH_SHORT).show();
+//            Snackbar.make(getActivity().findViewById(android.R.id.content),
+//                    getResources().getString(R.string.no_internet),
+//                    Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
         }
     }
 }

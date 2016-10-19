@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ir.technopedia.wordpressjsonclient.Model.CommentModel;
+import ir.technopedia.wordpressjsonclient.model.CommentModel;
 import ir.technopedia.wordpressjsonclient.R;
 
 /**
