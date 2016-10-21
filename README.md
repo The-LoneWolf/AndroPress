@@ -1,4 +1,5 @@
 # AndroPress
+<img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/icon.png" width="96px" height="96px" >
 An Open Source Android Client for self hosted wordpress blogs that works with json-api plugin
 
 <img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/all2.png">
@@ -33,12 +34,22 @@ more Instructions on development and other stuff witll be added :)<br>
 12 Improve Some Views Like Comment Dialog view<br>
 13 Cache system to load categories in navigation menu if there is no internet connection<Br>
 
+###V1.2
+14 Add aearch fragment
+15 Add about us
+16 Add archive for offline saving
+17 Add reporting System
+18 Add double back press to exit
+19 Fixed commenting system issues
+20 Updated commenting dialog ui
+21 Updated posts card ui
+22 Updated posts detail activity ui
+23 Fixed reloading post list issue on rotate
+
 ## Things to do
-1 Add Search<br>
-2 Add Caching system<br>
-3 Add Transition Effects<br>
-4 Add Settings<br>
-5 Add Different Views<br>
+1 Add Transition Effects<br>
+2 Add Settings<br>
+3 Add Different Views<br>
 ....<br>
 
 ## Things cannot be done

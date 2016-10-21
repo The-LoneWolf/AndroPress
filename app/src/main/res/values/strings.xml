@@ -2,12 +2,13 @@
     <string name="app_name">AndroPress</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_comments">Comments</string>
+    <string name="action_favorite">Add to Archive</string>
     <string name="action_share">Share</string>
     <string name="home">Home</string>
+    <string name="comments">Comments</string>
     <string name="categories">Category</string>
     <string name="archive">Archive</string>
-    <string name="about">About Me</string>
+    <string name="about">About US</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="written_by">Written by :</string>
     <string name="on_date">on date :</string>

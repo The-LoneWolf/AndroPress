@@ -45,7 +45,7 @@ public class CommentsActivity extends SwipeBaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle(getResources().getString(R.string.action_comments));
+        setTitle(getResources().getString(R.string.comments));
 
         linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         list = new ArrayList<>();
