@@ -3,6 +3,8 @@ An Open Source Android Client for self hosted wordpress blogs that works with js
 
 <img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/all2.png">
 
+<a href="https://github.com/The-LoneWolf/AndroPress/wiki/Recent-Screenshots">Recent Screenshots</a>
+
 ## Instructions
 1 Install <a href="https://wordpress.org/plugins/json-api/">JSON API wordpress plugin</a> and activate it.<br>
 2 Just Copy your api adress to baseUrl variable in <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/src/main/java/ir/technopedia/wordpressjsonclient/util/NetUtil.java">NetUtils.java</a><br>
