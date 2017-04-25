@@ -1,16 +1,16 @@
 # <img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/icon.png" width="64px" height="64px" > AndroPress
 An Open Source Android Client for self hosted wordpress blogs that works with json-api plugin
 
-<img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/all2.png">
+<img src="https://github.com/The-LoneWolf/AndroPress/raw/master/img/all2.png">
 
 <a href="https://github.com/The-LoneWolf/AndroPress/wiki/Recent-Screenshots">Recent Screenshots</a>
 
 ## Instructions
 1 Install <a href="https://wordpress.org/plugins/json-api/">JSON API wordpress plugin</a> and activate it.<br>
-2 Just Copy your api adress to baseUrl variable in <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/src/main/java/ir/technopedia/wordpressjsonclient/util/NetUtil.java">NetUtils.java</a><br>
+2 Just Copy your api adress to baseUrl variable in <a href="https://github.com/The-LoneWolf/AndroPress/blob/master/app/src/main/java/ir/technopedia/wordpressjsonclient/util/NetUtil.java">NetUtils.java</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp; ** if your domain adress is http://test.com your json api default adress would be http://test.com/api/
 <br>
-3 Copy your google-services.json files data to <a href="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/blob/master/app/google-services.json">google-services.json</a> in app folder and you are ready to go.<br><br>
+3 Copy your google-services.json files data to <a href="https://github.com/The-LoneWolf/AndroPress/blob/master/app/google-services.json">google-services.json</a> in app folder and you are ready to go.<br><br>
 
 more Instructions on development and other stuff witll be added :)<br>
 
@@ -18,7 +18,7 @@ more Instructions on development and other stuff witll be added :)<br>
 <br><br>
 
 ## Download sample apk
-<a href="http://mgarebaghi.ir/AndroPress_1.2.apk"><img src="https://github.com/The-LoneWolf/AndroidWordpressJsonApiClient/raw/master/img/download.png" width="64px" height="64px" ></a>
+<a href="http://mgarebaghi.ir/AndroPress_1.2.apk"><img src="https://github.com/The-LoneWolf/AndroPress/raw/master/img/download.png" width="64px" height="64px" ></a>
 
 ## Things Done
 ### V1
