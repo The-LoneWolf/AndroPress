@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="swipebackhelper-3.1.2">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.jude/swipebackhelper/3.1.2/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.jude/swipebackhelper/3.1.2/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0f59ac1a7bc5f234e2b4c50dbd6a1d57eff0c5f7/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/0f59ac1a7bc5f234e2b4c50dbd6a1d57eff0c5f7/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

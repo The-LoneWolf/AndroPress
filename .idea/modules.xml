@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroPress.iml" filepath="$PROJECT_DIR$/AndroPress.iml" />
       <module fileurl="file://$PROJECT_DIR$/Wordpressjsonclient.iml" filepath="$PROJECT_DIR$/Wordpressjsonclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
